@@ -11,7 +11,7 @@
 // importing the modules
 const express = require('express');
 const path = require('path');
-const collegeData = require('./collegeData');
+const collegeData = require('./modules/collegeData');
 
 
 // initializing express app

@@ -1,52 +1,84 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>WEB700</title>
-		<meta charset="UTF-8" />
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	</head>
+<head>
+    <title>WEB700</title>
+    <meta charset="UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
 
-	<body>
-		<nav class="navbar navbar-expand-lg navbar-light bg-light">
-			<a class="navbar-brand" href="#">Student Name</a>
-			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-				<span class="navbar-toggler-icon"></span>
-			</button>
-			
-			<div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav mr-auto">
-					<li class="nav-item active"><a class="nav-link" href="/">Home</a></li>
-					<li class="nav-item"><a class="nav-link" href="/about">About</a></li>
-					<li class="nav-item"><a class="nav-link" href="/htmlDemo">Html Demo</a></li>
-				</ul>
-				<ul class="navbar-nav ml-auto">
-					<li class="nav-item"><a class="nav-link" href="/students">Students</a></li>
-					<li class="nav-item"><a class="nav-link" href="/tas">Teaching Assistants</a></li>
-					<li class="nav-item"><a class="nav-link" href="/courses">Courses</a></li>
-				</ul>
-			</div>
-		</nav>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand" href="#">Student Name</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active"><a class="nav-link" href="/">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+                <li class="nav-item"><a class="nav-link" href="/htmlDemo">Html Demo</a></li>
+            </ul>
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="/students">Students</a></li>
+                <li class="nav-item"><a class="nav-link" href="/tas">Teaching Assistants</a></li>
+                <li class="nav-item"><a class="nav-link" href="/courses">Courses</a></li>
+            </ul>
+        </div>
+    </nav>
 
-		<div class="container">
-			<div class="row">
-				<main class="col-md-12">
+    <div class="container">
+        <div class="row">
+            <main class="col-md-12">
 
+                <!-- Start your code here -->
+                <div class="jumbotron mt-4">
+                    <h1 class="display-4">Welcome to my website!</h1><!--title-->
+                    <p class="lead">I will be demonstrating HTML5 principles and techniques, Routing in Express, getting data from json files .</p>
+                    <hr class="my-4">
+                    <p>This site consists of 3 static views (Home, About, HTML Demo) and 5 routes that supply data, including:</p>
+                    <ul>
+                        <!--links -->
+                        <li><a href="/students">All Students</a></li>
+                        <li><a href="/students?course=3">Students by Course</a></li>
+                        <li><a href="/student/2">A Student By Student Number</a></li>
+                        <li><a href="/tas">All Teaching Assistants</a></li>
+                        <li><a href="/courses">All Courses</a></li>
+                    </ul>
+                </div>
+                <!-- short paragraph-->
+                <div class="mt-4">
+                    <h2>Introduction to HTML5</h2>
+                    <p>This site utilizes HTML5: a  language used for structuring and presenting content on the World Wide Web. this is soo cool with lorem ipsu lmaoo .</p>
+                </div>
+                <!--students list button-->
+                <div class="row mt-4">
+                    <div class="col-md-4">
+                        <h2>Students</h2>
+                        <p> list of all students enrolled in the course.</p>
+                        <a class="btn btn-secondary" href="/students" role="button">View Students &raquo;</a>
+                    </div>
+                     <!-- Teaching assistant button-->
+                    <div class="col-md-4">
+                        <h2>Teaching Assistants</h2>
+                        <p>list of all teaching assistants for the course.</p>
+                        <a class="btn btn-secondary" href="/tas" role="button">View TAs &raquo;</a>
+                    </div>
+                     <!-- Courses button-->
+                    <div class="col-md-4">
+                        <h2>Courses</h2>
+                        <p>list of all courses offered in the department.</p>
+                        <a class="btn btn-secondary" href="/courses" role="button">View Courses &raquo;</a>
+                    </div>
+                </div>
+                <!-- End your code here -->
 
+            </main>
+        </div>
+    </div>
 
-					<!-- Start your code here -->
-					
-					
-					
-					<!-- End your code here  -->
-
-
-
-				</main>
-			</div>
-		</div>
-
-		<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
-		<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-	</body>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
 </html>
