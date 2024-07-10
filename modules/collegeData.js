@@ -1,5 +1,4 @@
 const fs = require("fs");
-const path = require("path");S
 
 class Data{
     constructor(students, courses){
@@ -103,21 +102,4 @@ module.exports.getStudentsByCourse = function (course) {
     });
 };
 
-// adding students 
 
-function addStudent(studentData) {
-    return new Promise((resolve, reject) => {
-        if (!studentData) {
-            reject('No student data provided');
-        } else {
-            studentData.TA = studentData.TA ? true : false;
-            studentData.studentNum = dataCollection.students.length + 1;
-            dataCollection.students.push(studentData);
-            resolve();
-        }
-    });
-}
-
-module.exports = {
-    addStudent
-};

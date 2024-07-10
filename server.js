@@ -23,6 +23,8 @@ const collegeData = require('./modules/collegeData');
 const app = express();
 const HTTP_PORT = process.env.PORT || 8080; // this is our server port 
 app.use(express.static('public'));
+app.use(express.urlencoded({ extended: true }));
+
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "/views/home.html")); //route for our home page
 });
@@ -30,12 +32,14 @@ app.get("/", (req, res) => {
 app.get("/about", (req, res) => {
   res.sendFile(path.join(__dirname, "/views/about.html"));
 });
+
 // html demo page
 app.get("/htmlDemo", (req, res) => {
   res.sendFile(path.join(__dirname, "/views/htmlDemo.html"));
 });
 // addstudents page
-app.get("/addstudent", (req, res) => {
+app.get("/students/add", (req, res) => {
+  console.log('This is working');
   res.sendFile(path.join(__dirname, "/views/addStudent.html"));
 });
 
@@ -81,7 +85,7 @@ app.get("/student/:num", (req, res) => {
 });
 
 // adding the students 
-app.post("/addStudent", (req, res) => {
+app.post("/students/add", (req, res) => {
   collegeData.addStudent(req.body).then(() => {
     res.redirect("/students");
   }).catch((err) => {

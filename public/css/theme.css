@@ -2,6 +2,7 @@
 
 body, html {
     background: linear-gradient(to right, #0b5fa4, #0ca3a5);
+    background: blur 80px;;
     overflow: auto;
     font-family: 'Roboto', sans-serif;
 }
@@ -64,4 +65,9 @@ h1 {
     color: #126f87;
     stroke:2px 2px 2px 2px #0b5fa4;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.img {
+    width: 50px;
+    size: 100px;
 }
