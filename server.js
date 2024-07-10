@@ -24,6 +24,11 @@ const app = express();
 const HTTP_PORT = process.env.PORT || 8080; // this is our server port 
 app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));
+app.set('views', __dirname + '/views');
+app.use(express.static(__dirname + '/public'));
+
+require('pg'); // explicitly require the "pg" module
+const Sequelize = require('sequelize');
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "/views/home.html")); //route for our home page
