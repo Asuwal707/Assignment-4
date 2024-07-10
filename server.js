@@ -39,7 +39,7 @@ app.get("/htmlDemo", (req, res) => {
 });
 // addstudents page
 app.get("/students/add", (req, res) => {
-  console.log('This is working');
+  
   res.sendFile(path.join(__dirname, "/views/addStudent.html"));
 });
 

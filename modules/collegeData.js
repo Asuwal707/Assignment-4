@@ -102,4 +102,20 @@ module.exports.getStudentsByCourse = function (course) {
     });
 };
 
+module.exports.addStudent = function (studentData) {
+    return new Promise(function (resolve, reject) {
+        if (studentData) {
+            // If studentData.TA is undefined, set it to false, otherwise set it to true
+            studentData.TA = (studentData.TA) ? true : false;
+            studentData.studentNum = dataCollection.students.length + 1;
+// Add the student to the array
+            dataCollection.students.push(studentData);
+
+            resolve();
+        } else {
+            reject("No student data provided");
+        }
+    });
+};
+
 
