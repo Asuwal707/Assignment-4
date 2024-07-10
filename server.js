@@ -12,12 +12,17 @@
 const express = require('express');
 const path = require('path');
 const collegeData = require('./modules/collegeData');
+//
+//importing public css
+
+
+
 
 
 // initializing express app
 const app = express();
 const HTTP_PORT = process.env.PORT || 8080; // this is our server port 
-
+app.use(express.static('public'));
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "/views/home.html")); //route for our home page
 });
@@ -29,7 +34,10 @@ app.get("/about", (req, res) => {
 app.get("/htmlDemo", (req, res) => {
   res.sendFile(path.join(__dirname, "/views/htmlDemo.html"));
 });
-
+// addstudents page
+app.get("/addstudent", (req, res) => {
+  res.sendFile(path.join(__dirname, "/views/addStudent.html"));
+});
 
 // getting all the students
 app.get("/students", (req, res) => {
@@ -71,6 +79,16 @@ app.get("/student/:num", (req, res) => {
     res.json({message: "no results"});
   });
 });
+
+// adding the students 
+app.post("/addStudent", (req, res) => {
+  collegeData.addStudent(req.body).then(() => {
+    res.redirect("/students");
+  }).catch((err) => {
+    res.status(500).send("Unable to add student");
+  });
+});
+
 // this is our middleware ued to handle 404 errors.
 app.use((req, res) => {
   res.status(404).send("Page Not Found");

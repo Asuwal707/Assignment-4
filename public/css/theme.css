@@ -1,0 +1,67 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap');
+
+body, html {
+    background: linear-gradient(to right, #0b5fa4, #0ca3a5);
+    overflow: auto;
+    font-family: 'Roboto', sans-serif;
+}
+
+.bg-light {
+    background-color: #36807b !important;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+    font-family: 'Roboto', sans-serif;
+    color: #ffffff !important;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav-link {
+    color: #ffffff !important;
+}
+
+.nav-link:hover {
+    color: #76d0c4 !important;
+}
+
+.btn-primary {
+    background-color: #000000;
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.btn-primary:hover {
+    background-color: #25899a;
+}
+
+table tr:nth-child(odd) {
+    background-color: #32727b;
+}
+ h2, h3, h4, h5, h6 {
+    font-family: 'Roboto', sans-serif;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+a {
+    color: #20658a;
+}
+
+a:hover {
+    color: #10b2c4;
+}
+
+legend {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-family: 'Roboto', sans-serif;
+    color: #ffffff;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+h1 {
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: #126f87;
+    stroke:2px 2px 2px 2px #0b5fa4;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
