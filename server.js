@@ -27,8 +27,7 @@ app.use(express.urlencoded({ extended: true }));
 app.set('views', __dirname + '/views');
 app.use(express.static(__dirname + '/public'));
 
-require('pg'); // explicitly require the "pg" module
-const Sequelize = require('sequelize');
+
 
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "/views/home.html")); //route for our home page
