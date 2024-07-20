@@ -1,10 +1,10 @@
 /*********************************************************************************
-*  WEB700 – Assignment 04
+*  WEB700 – Assignment 05
 *  I declare that this assignment is my own work in accordance with Seneca Academic Policy. No part
 *  of this assignment has been copied manually or electronically from any other source
 *  (including 3rd party web sites) or distributed to other students.
 * 
-*  Name: aashish Student ID: 161760236 Date:7/10/2024
+*  Name: aashish Student ID: 161760236 Date:7/20/2024
 *
 ********************************************************************************/
 
@@ -12,6 +12,7 @@
 const express = require('express');
 const path = require('path');
 const collegeData = require('./modules/collegeData');
+const exphbs = require('express-handlebars');
 //
 //importing public css
 
@@ -28,24 +29,34 @@ app.set('views', __dirname + '/views');
 app.use(express.static(__dirname + '/public'));
 
 
-
+/*
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "/views/home.html")); //route for our home page
 });
+*/
+//new home route
+app.get("/", (req, res) => {
+  res.render("home");
+});
 // about page
 app.get("/about", (req, res) => {
-  res.sendFile(path.join(__dirname, "/views/about.html"));
+  res.render('about');
 });
 
 // html demo page
 app.get("/htmlDemo", (req, res) => {
-  res.sendFile(path.join(__dirname, "/views/htmlDemo.html"));
+  res.render('htmlDemo');
 });
 // addstudents page
 app.get("/students/add", (req, res) => {
-  
-  res.sendFile(path.join(__dirname, "/views/addStudent.html"));
+  res.render('addStudent');
 });
+
+// hbs config
+app.engine('.hbs', exphbs.engine({ extname: '.hbs', defaultLayout: 'main' }));
+app.set('view engine', '.hbs'); // hbs configuration
+
+
 
 // getting all the students
 app.get("/students", (req, res) => {
