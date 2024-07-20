@@ -1,0 +1,41 @@
+<div class="row">
+    <div class="col-md-12">
+        <br>
+        <h2>{{student.firstName}} {{student.lastName}}</h2>
+        <hr />
+        <form>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="studentNum">Student Number</label>
+                        <input class="form-control" id="studentNum" name="studentNum" type="text" readonly value="{{student.studentNum}}" />
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input class="form-control" id="email" name="email" type="text" readonly value="{{student.email}}" />
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <input class="form-control" id="address" name="address" type="text" readonly value="{{student.addressStreet}}, {{student.addressCity}}, {{student.addressProvince}}" />
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="status">Status</label>
+                        <input class="form-control" id="status" name="status" type="text" readonly value="{{student.status}}" />
+                    </div>
+                </div>
+                <div class="col-md-9">
+                    <div class="form-group">
+                        <label for="course">Course ID</label>
+                        <input class="form-control" id="course" name="course" type="text" readonly value="{{student.course}}" />
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>

@@ -9,94 +9,119 @@
 ********************************************************************************/
 
 // importing the modules
+
+const app = express();
+const HTTP_PORT = process.env.PORT || 8080; // this is our server port 
 const express = require('express');
 const path = require('path');
 const collegeData = require('./modules/collegeData');
 const exphbs = require('express-handlebars');
-//
-//importing public css
+
 
 
 
 
 
 // initializing express app
-const app = express();
-const HTTP_PORT = process.env.PORT || 8080; // this is our server port 
-app.use(express.static('public'));
+
+
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
-app.set('views', __dirname + '/views');
-app.use(express.static(__dirname + '/public'));
+app.set('views', path.join(__dirname, 'views'));
+
+// handlebar helpers and fixing nav bar
+
+app.engine('.hbs', exphbs.engine({ 
+  extname: '.hbs',
+  helpers: { 
+      navLink: function(url, options){
+          return '<li' + 
+              ((url == app.locals.activeRoute) ? ' class="nav-item active" ' : ' class="nav-item" ') + 
+              '><a class="nav-link" href="' + url + '">' + options.fn(this) + '</a></li>';
+      },
+      equal: function (lvalue, rvalue, options) {
+          if (arguments.length < 3)
+              throw new Error("Handlebars Helper equal needs 2 parameters");
+          if (lvalue != rvalue) {
+              return options.inverse(this);
+          } else {
+              return options.fn(this);
+          }
+      }           
+  }
+}));
+app.set('view engine', '.hbs');
 
 
-/*
-app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "/views/home.html")); //route for our home page
+//middleware function for nav bar
+
+app.use(function(req,res,next){
+  let route = req.path.substring(1);
+  app.locals.activeRoute = "/" + (isNaN(route.split('/')[1]) ? route.replace(/\/(?!.*)/, "") : route.replace(/\/(.*)/, ""));    
+  next();
 });
-*/
-//new home route
+
+
+//new route
 app.get("/", (req, res) => {
-  res.render("home");
+  res.render('home', {layout: 'main'});
 });
-// about page
+
 app.get("/about", (req, res) => {
-  res.render('about');
+  res.render('about', {layout: 'main'});
 });
 
-// html demo page
 app.get("/htmlDemo", (req, res) => {
-  res.render('htmlDemo');
+  res.render('htmlDemo', {layout: 'main'});
 });
-// addstudents page
-app.get("/students/add", (req, res) => {
+
+app.get('/students/add', (req, res) => {
   res.render('addStudent');
 });
 
+app.post("/students/add", (req, res) => {
+  collegeData.addStudent(req.body)
+  .then(() => {
+      res.redirect("/students");
+  })
+  .catch((error) => {
+      console.log(error.message)
+      res.status(400).send(`<script>alert('Something Went Wrong'); window.location.href = '/addStudent';</script>`);
+  })
+})
 // hbs config
-app.engine('.hbs', exphbs.engine({ extname: '.hbs', defaultLayout: 'main' }));
+
 app.set('view engine', '.hbs'); // hbs configuration
 
 
 
-// getting all the students
+
+
+
+
+// new route for getting students
+
 app.get("/students", (req, res) => {
-  if (req.query.course) {
-    collegeData.getStudentsByCourse(req.query.course).then((data) => {
-      res.json(data); // sending student data which is filtered
-    }).catch((err) => {
-      res.json({message: "no results"}); // response for rejected promise
-    });
-  } else {
-    collegeData.getAllStudents().then((data) => {
-      res.json(data); // send all student data as json
-    }).catch((err) => {
-      res.json({message: "no results"});
-    });
+  if (req.query && req.query.course) {
+      collegeData.getStudentsByCourse(req.query.course)
+      .then((students) => {
+          res.render("students", {data: students});
+      })
+      .catch((err) => {
+          console.log(err.message);
+          res.render("students", {message: "No Results"});
+      })
   }
-});
-// getting all TAs
-app.get("/tas", (req, res) => {
-  collegeData.getTAs().then((data) => {
-    res.json(data);
-  }).catch((err) => {
-    res.json({message: "no results"});
-  });
-});
-// getting all courses
-app.get("/courses", (req, res) => {
-  collegeData.getCourses().then((data) => {
-    res.json(data);
-  }).catch((err) => {
-    res.json({message: "no results"});
-  });
-});
-// getting a specific student by their number
-app.get("/student/:num", (req, res) => {
-  collegeData.getStudentByNum(req.params.num).then((data) => {
-    res.json(data); // sending studemt data as json
-  }).catch((err) => {
-    res.json({message: "no results"});
-  });
+  else {
+      collegeData.getAllStudents()
+      .then((students) => {
+          res.render("students", {data: students});
+      })
+      .catch((err) => {
+          console.log(err.message);
+          res.render("students", {message: "No Results"});
+      })
+  }
 });
 
 // adding the students 
@@ -107,6 +132,63 @@ app.post("/students/add", (req, res) => {
     res.status(500).send("Unable to add student");
   });
 });
+
+
+// route for individual students that
+
+app.get('/student/:studentNum', (req, res) => {
+  const studentNum = req.params.studentNum;
+  collegeData.getStudentByNum(studentNum).then((student) => {
+      if (student) {
+          res.render('student', { student });
+      } else {
+          res.render('student', { message: "Student not found" });
+      }
+  }).catch((err) => {
+      res.render('student', { message: "Error retrieving student" });
+  });
+});
+
+
+
+
+// getting all courses (updated for hbs)
+app.get("/courses", (req, res) => {
+  collegeData.getCourses()
+    .then((data) => {
+      res.render("courses", {courses: data});
+    })
+    .catch((err) => {
+      res.render("courses", {message: "no results"});
+    });
+});
+
+// Get route for individual courses.
+
+app.get('/course/:courseId', (req, res) => {
+  const courseId = req.params.courseId;
+  collegeData.getCourseById(courseId).then((course) => {
+      if (course) {
+          res.render('course', { course });
+      } else {
+          res.render('course', { message: "Course not found" });
+      }
+  }).catch((err) => {
+      res.render('course', { message: "Error retrieving course" });
+  });
+});
+
+
+// getting a specific student by their number
+app.get("/student/:num", (req, res) => {
+  collegeData.getStudentByNum(req.params.num).then((data) => {
+    res.json(data); // sending studemt data as json
+  }).catch((err) => {
+    res.json({message: "no results"});
+  });
+});
+
+
 
 // this is our middleware ued to handle 404 errors.
 app.use((req, res) => {
