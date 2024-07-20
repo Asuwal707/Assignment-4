@@ -99,7 +99,7 @@ module.exports.getStudentsByCourse = function (course) {
         resolve(filteredStudents);
     });
 };
-
+// function to adds students
 module.exports.addStudent = function (requestBody) {
     return new Promise(function (resolve, reject) {
         try {
