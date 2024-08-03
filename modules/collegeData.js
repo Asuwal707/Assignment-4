@@ -1,13 +1,13 @@
-const fs = require("fs");
-
-class Data{
-    constructor(students, courses){
-        this.students = students;
-        this.courses = courses;
-    }
-}
-
-let dataCollection = null;
+const Sequelize = require('sequelize');
+var sequelize = new Sequelize('senecadb', 'senecadb_owner', 'rE8OTeSVFuZ5', {
+  host: 'ep-aged-tree-a5fu1dnm.us-east-2.aws.neon.tech',
+  dialect: 'postgres',
+  port: 5432,
+  dialectOptions: {
+    ssl: { rejectUnauthorized: false }
+  },
+  query: { raw: true }
+});
 
 module.exports.initialize = function () {
     return new Promise( (resolve, reject) => {
