@@ -86,26 +86,23 @@ app.get('/htmlDemo', (req, res) => {
 // Display all students
 app.get('/students', (req, res) => {
     collegeData.getAllStudents().then(students => {
-        // Converting Sequelize model instances to plain objects
-        const plainStudents = students.map(student => student.get({ plain: true }));
-
-        console.log('Students Data:', plainStudents); // Log to verify
-
-        if (plainStudents.length > 0) {
-            res.render('students', { students: plainStudents });
-        } else {
-            res.render('students', { message: "No students found" });
-        }
+      const plainStudents = students.map(student => student.get({ plain: true }));
+      console.log('Students Data:', plainStudents); 
+      if (plainStudents.length > 0) {
+        res.render('students', { students: plainStudents });
+      } else {
+        res.render('students', { message: "No students found" });
+      }
     }).catch(err => {
-        console.error('Error fetching students:', err); // Log errors
-        res.render('students', { message: "Error fetching students" });
+      console.error('Error fetching students:', err.stack); 
+      res.render('students', { message: "Error fetching students" });
     });
-});
+  });
 
 // hbs config
 app.set('view engine', '.hbs');
 
-// Displaying student by studentNum
+// Display student by studentNum
 app.get('/student/:studentNum', (req, res) => {
     let viewData = {};
 
@@ -123,6 +120,7 @@ app.get('/student/:studentNum', (req, res) => {
         .then(() => collegeData.getCourses())
         .then(data => {
             viewData.courses = data.map(course => course.get({ plain: true }));
+            // Mark the selected course
             viewData.courses.forEach(course => {
                 if (course.courseId === viewData.student.courseId) {
                     course.selected = true;
@@ -134,7 +132,7 @@ app.get('/student/:studentNum', (req, res) => {
         })
         .then(() => {
             if (viewData.student === null) {
-                res.status(404).send("Student Not Found, Please Enter valid details");
+                res.status(404).send("Student Not Found");
             } else {
                 res.render("student", { viewData: viewData });
             }
@@ -190,7 +188,7 @@ app.get('/courses', (req, res) => {
         if (plainCourses.length > 0) {
             res.render('courses', { courses: plainCourses });
         } else {
-            res.render('courses', { message: "No courses found, Please Try Again" });
+            res.render('courses', { message: "No courses found" });
         }
     }).catch(err => {
         res.render('courses', { message: "Error fetching courses" });
@@ -216,7 +214,7 @@ app.post('/courses/add', (req, res) => {
         res.redirect('/courses');
     }).catch((err) => {
         console.error(err);
-        res.status(500).send("Unable to add course, Please Try Again");
+        res.status(500).send("Unable to add course");
     });
 });
 

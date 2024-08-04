@@ -6,7 +6,6 @@ var sequelize = new Sequelize('senecadb', 'senecadb_owner', 'rE8OTeSVFuZ5', {
   dialectOptions: {
     ssl: { rejectUnauthorized: false }
   },
-  query: { raw: true }
 });
 
 // creating our data models
@@ -71,18 +70,19 @@ module.exports.initialize = function () {
 // Getting all students
 module.exports.getAllStudents = function () {
     return Student.findAll({
-        include: [{
-            model: Course,
-            as: 'course',
-            required: false  
-        }]
+      include: [{
+        model: Course,
+        as: 'course',
+        required: false  
+      }]
     }).then(students => {
-        if (students.length === 0) {
-            throw new Error('No students found, Please Try Again');
-        }
-        return students;
+      if (students.length === 0) {
+        throw new Error('No students found, Please Try Again');
+      }
+      return students;
     });
-};
+  };
+
 
 // Getting all TAs
 module.exports.getTAs = function () {
@@ -180,15 +180,21 @@ module.exports.updateStudent = function (studentData) {
 // Adding course
 module.exports.addCourse = function (courseData) {
     for (let prop in courseData) {
-        if (courseData[prop] === "") {
-            courseData[prop] = null;
-        }
+      if (courseData[prop] === "") {
+        courseData[prop] = null;
+      }
     }
-
+  
     return Course.create(courseData)
-        .catch(() => { throw new Error('Unable to create course'); });
-};
-
+      .then(newCourse => {
+        console.log('New course created:', newCourse.toJSON());
+        return newCourse;
+      })
+      .catch(error => {
+        console.error('Error creating course:', error);
+        throw new Error('Unable to create course');
+      });
+  };
 // Updating the course details
 module.exports.updateCourse = function (courseData) {
     for (let prop in courseData) {
