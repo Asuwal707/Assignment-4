@@ -17,15 +17,15 @@
         </thead>
         <tbody>
         {{#each students}}
-          <tr>
-            <td>{{this.studentNum}}</td>
-            <td><a href="/student/{{this.studentNum}}">{{this.firstName}} {{this.lastName}}</a></td>
-            <td><a href="mailto:{{this.email}}">{{this.email}}</a></td>
-            <td>{{this.addressStreet}}, {{this.addressCity}}, {{this.addressProvince}}</td>
-            <td>{{this.status}}</td>
-            <td><a href="/students?course={{this.course}}">{{this.course}}</a></td>
-            
-          </tr>
+       <tr>
+                    <td>{{studentNum}}</td>
+                    <td><a href="/student/{{studentNum}}">{{firstName}} {{lastName}}</a></td>
+                    <td><a href="mailto:{{email}}">{{email}}</a></td>
+                    <td>{{addressStreet}} {{addressCity}} {{addressProvince}}</td>
+                    <td>{{status}}</td>
+                    <td>{{#if course}}{{course.courseCode}}: {{course.courseDescription}}{{else}}N/A{{/if}}</td>
+                    <td><a href="/student/delete/{{studentNum}}" class="btn btn-danger">Remove</a></td>
+                </tr>
           
         {{/each}}
         </tbody>

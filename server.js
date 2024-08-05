@@ -190,15 +190,16 @@ app.get('/student/delete/:studentNum', (req, res) => {
 
 // Display all courses
 app.get('/courses', (req, res) => {
-  collegeData.getCourses()
-    .then(courses => {
+  collegeData.getCourses().then(courses => {
       const plainCourses = courses.map(course => course.get({ plain: true }));
-      res.render('courses', { courses: plainCourses.length > 0 ? plainCourses : null });
-    })
-    .catch(err => {
-      console.error('Error fetching courses:', err);
-      res.status(500).render('courses', { message: "Error fetching courses" });
-    });
+      if (plainCourses.length > 0) {
+          res.render('courses', { courses: plainCourses });
+      } else {
+          res.render('courses', { message: "Sorry,No courses found" });
+      }
+  }).catch(err => { 
+      res.render('courses', { message: "Error fetching courses" });
+  });
 });
 
 // Display course details by courseId

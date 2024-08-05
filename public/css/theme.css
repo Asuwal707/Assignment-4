@@ -23,7 +23,7 @@ body, html {
 }
 
 .nav-link:hover {
-    color: #76d0c4 !important;
+    color: #000000 !important;
 }
 
 .btn-primary {
@@ -46,11 +46,11 @@ table tr:nth-child(odd) {
 }
 
 a {
-    color: #20658a;
+    color: #000000;
 }
 
 a:hover {
-    color: #10b2c4;
+    color: #f2f2f2;
 }
 
 legend {

@@ -1,9 +1,16 @@
 <div class="row">
-    <div class="col-md-12">
+    <main class="col-md-12">
         <br>
-        <h2>{{student.firstName}} {{student.lastName}}</h2>
+        <h2>{{viewData.student.firstName}} {{viewData.student.lastName}} - Student: {{viewData.student.studentNum}}</h2>
         <hr />
         <form>
+            <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input class="form-control" name="Name" type="text" value="{{viewData.student.firstName}}" />
+                        </div>
+                    </div>
             <div class="row">
                 <div class="col-md-3">
                     <div class="form-group">
