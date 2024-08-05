@@ -36,12 +36,19 @@
                         <input class="form-control" id="status" name="status" type="text" readonly value="{{student.status}}" />
                     </div>
                 </div>
-                <div class="col-md-9">
-                    <div class="form-group">
-                        <label for="course">Course ID</label>
-                        <input class="form-control" id="course" name="course" type="text" readonly value="{{student.course}}" />
+                <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="course">Course:</label>
+                            <select class="form-control" name="courseId" id="course">
+                                <option value="">Select a course</option>
+                                {{#each viewData.courses}}
+                                    <option value="{{courseId}}" {{#equal ../viewData.student.course courseId}}selected{{/equal}}>{{courseCode}}</option>
+                                {{/each}}
+                            </select>
+                        </div>
                     </div>
                 </div>
+
             </div>
         </form>
     </div>
