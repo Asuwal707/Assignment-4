@@ -3,14 +3,23 @@
         <br>
         <h2>{{viewData.student.firstName}} {{viewData.student.lastName}} - Student: {{viewData.student.studentNum}}</h2>
         <hr />
-        <form>
+        <form method="post" action="/student/update">
+         <input type="hidden" name="studentNum" value="{{viewData.student.studentNum}}" />
+         <fieldset>
             <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label>Name</label>
-                            <input class="form-control" name="Name" type="text" value="{{viewData.student.firstName}}" />
+                            <label>First Name:</label>
+                            <input class="form-control" name="firstName" type="text" value="{{viewData.student.firstName}}" />
                         </div>
                     </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Last Name:</label>
+                            <input class="form-control" name="lastName" type="text" value="{{viewData.student.lastName}}" />
+                        </div>
+                    </div>
+                </div>
             <div class="row">
                 <div class="col-md-3">
                     <div class="form-group">
@@ -30,6 +39,7 @@
                         <input class="form-control" id="address" name="address" type="text" readonly value="{{student.addressStreet}}, {{student.addressCity}}, {{student.addressProvince}}" />
                     </div>
                 </div>
+                </fieldset>
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="status">Status</label>

@@ -86,15 +86,18 @@ app.get('/htmlDemo', (req, res) => {
 
 // Display all students
 app.get('/students', (req, res) => {
-  collegeData.getAllStudents()
-    .then(students => {
+  collegeData.getAllStudents().then(students => {
       const plainStudents = students.map(student => student.get({ plain: true }));
-      res.render('students', { students: plainStudents.length > 0 ? plainStudents : null });
-    })
-    .catch(err => {
-      console.error('Error fetching students:', err);
-      res.status(500).render('students', { message: "Error fetching students" });
-    });
+      console.log('Students Data:', plainStudents); 
+      if (plainStudents.length > 0) {
+          res.render('students', { students: plainStudents });
+      } else {
+          res.render('students', { message: "Sorry, No students found" });
+      }
+  }).catch(err => {
+      console.error('Error fetching students:', err); 
+      res.render('students', { message: "Error fetching students" });
+  });
 });
 
 // Display student by studentNum
@@ -197,13 +200,12 @@ app.get('/courses', (req, res) => {
       if (plainCourses.length > 0) {
           res.render('courses', { courses: plainCourses });
       } else {
-          res.render('courses', { message: "Sorry,No courses found" });
+          res.render('courses', { message: "Sorry No courses found" });
       }
-  }).catch(err => { 
+  }).catch(err => {
       res.render('courses', { message: "Error fetching courses" });
   });
 });
-
 // Display course details by courseId
 app.get('/course/:courseId', (req, res) => {
   collegeData.getCourseById(req.params.courseId)
@@ -220,7 +222,6 @@ app.get('/course/:courseId', (req, res) => {
 app.get('/courses/add', (req, res) => {
   res.render('addCourse');
 });
-
 app.post('/courses/add', (req, res) => {
   collegeData.addCourse(req.body)
     .then(() => {

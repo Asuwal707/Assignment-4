@@ -1,83 +1,98 @@
 <div class="row">
     <main class="col-md-12">
-        <!-- Start your code here -->
-        <div class="form-container">
-        <form action="/students/add" method="post">
-            <div class="form-section">
-                <h2>Personal Information</h2>
-                <div class="form-row">
-                    <div class="form-column">
-                        <label for="firstname">First Name</label>
-                        <input type="text" id="firstname" name="firstname" required>
+        <br>
+        <h2>Add NewStudent</h2>
+        <hr />
+        <form method="POST" action="/students/add">
+            <fieldset>
+                <legend>Student Information</legend>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>First Name:</label>
+                            <input class="form-control" name="firstName" type="text" />
+                        </div>
                     </div>
-                    <div class="form-column">
-                        <label for="lastname">Last Name</label>
-                        <input type="text" id="lastname" name="lastname" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-column">
-                        <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required>
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-column">
-                        <label for="addressStreet">Address (Street)</label>
-                        <input type="text" id="addressStreet" name="addressStreet" required>
-                    </div>
-                    <div class="form-column">
-                        <label for="addressCity">Address (City)</label>
-                        <input type="text" id="addressCity" name="addressCity" required>
-                    </div>
-                    <div class="form-column">
-                        <label for="addressProvince">Address (Province)</label>
-                        <input type="text" id="addressProvince" name="addressProvince" required>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label>Last Name:</label>
+                            <input class="form-control" name="lastName" type="text" />
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="form-section">
-                <h2>Academic Information</h2>
-                <div class="form-row">
-                    <div class="form-column">
-                        <label for="TA">College Employment</label>
-                        <label class="checkbox-label">
-                            <input type="checkbox" id="teachingAssistant" name="TA" value="teachingAssistant">
-                            Teaching Assistant
-                        </label>
-                    </div>
-                    <div class="form-column">
-                        <label for="status">Enrollment Status</label>
-                        <label class="checkbox-label">
-                            <input type="radio" id="fullTime" name="status" value="Full Time" required>
-                            Full Time
-                        </label>
-                        <label class="checkbox-label">
-                            <input type="radio" id="partTime" name="status" value="Part Time" required>
-                            Part Time
-                        </label>
-                    </div>
-                    <div class="form-column">
-                        <label for="course">Enrolled in Course</label>
-                        <select id="course" name="course" required>
-                            <option value="1">Relational Database Design and Implementation</option>
-                            <option value="2">Java Programming</option>
-                            <option value="3">Introduction to Cloud Computing</option>
-                            <option value="4">Database Administration and Management</option>
-                            <option value="5">Web Programming</option>
-                            <option value="6">Applied Capstone Project</option>
-                            <option value="7">Database Connectivity Using Java</option>
-                            <option value="8">Accessing Big Data</option>
-                            <option value="9">Datawarehousing</option>
-                            <option value="10">Security in Databases and Web Applications</option>
-                            <option value="11">Work Term Preparation (Work-Integrated Learning option only)</option>
-                        </select>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label>Email:</label>
+                            <input class="form-control" name="email" type="email" />
+                        </div>
                     </div>
                 </div>
-            </div>
-            <button type="submit" class="submit-button">Add Student</button>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Address (Street):</label>
+                            <input class="form-control" name="addressStreet" type="text" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Address (City):</label>
+                            <input class="form-control" name="addressCity" type="text" />
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Address (Province):</label>
+                            <input class="form-control" name="addressProvince" type="text" />
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <fieldset>
+                <legend>Academic Information</legend>
+                <div class="row">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>College Employment:</label><br />
+                            <div class="form-check">
+                                <input class="form-check-input" name="TA" type="checkbox" id="TA">
+                                <label class="form-check-label" for="TA">
+                                    Teaching Assistant
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>Enrollment Status:</label><br />
+                            <label class="checkbox-inline">
+                                <input type="radio" name="status" value="Full Time" /> Full Time
+                            </label>
+                            <label class="checkbox-inline">
+                                <input type="radio" name="status" value="Part Time" /> Part Time
+                            </label>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="course">Enrolled in Course:</label>
+                            {{#if courses}}
+                                <select class="form-control" name="courseId" id="course">
+                                    <option value="">Select Course</option>
+                                    {{#each courses}}
+                                        <option value="{{courseId}}">{{courseCode}}</option>
+                                    {{/each}}
+                                </select>
+                            {{else}}
+                                <div>No Courses</div>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <hr />
+            <input type="submit" class="btn btn-primary float-right" value="Add Student" />
         </form>
-        </div>
-        <!-- End your code here  -->
     </main>
 </div>
