@@ -15,6 +15,8 @@ const collegeData = require('./modules/collegeData');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 require('dotenv').config(); // the all new .env config for port
+app.use(express.static(path.join(__dirname, 'public')));
+
 
 // Handlebars helpers
 const hbs = exphbs.create({
